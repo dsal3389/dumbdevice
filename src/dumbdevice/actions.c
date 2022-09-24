@@ -77,6 +77,11 @@ void set_session_level(const Arg *arg, ...)
     session->level = arg->i;
 }
 
+void alias(const Arg *arg, ...)
+{
+    // need to implement
+}
+
 /* default error handler, defined in cond.def.h as ON_ERROR_FUNC macro */
 void on_error(const Arg *arg, ...)
 {

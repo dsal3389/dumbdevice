@@ -62,9 +62,7 @@ void shell()
     while(!session->eof){
         inplen = input(session->prompt, inpbuff, sizeof(inpbuff));
         inplen = strip(inpbuff, inplen, inpbuff);
-
-        if(inplen <= 0)
-            continue;
+        if(inplen <= 0) continue;
 
         cmd = find_cmd_match(inpbuff, inplen);
         
