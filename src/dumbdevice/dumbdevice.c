@@ -79,7 +79,7 @@ void shell()
 void init_session()
 {
     session->prompt = SESSION_INIT_PPROMP;
-    session->level = 0;
+    session->level = SESSION_INIT_LEVEL;
     session->eof = 0;
 }
 

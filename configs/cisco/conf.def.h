@@ -12,19 +12,15 @@ define what function to call in case of error (advance)
 */
 #define ON_ERROR_FUNC on_error
 
+/* safe, macros that can be deleted or overwritten, only used in this file */
+#define HOSTNAME "dumbdevice"
+#define CONSOLE_LEVEL 0
+#define EXEC_LEVEL 1
 
 /* unsafe, macros that are used outside this file */
 #define ANY_LEVEL -1
-
-
-/* safe,, macros that can be deleted or overwritten, only used in this file */
-#define CONSOLE_LEVEL 0
-#define EXEC_LEVEL 1
-#define CONFIG_LEVEL 2
-
-#define HOSTNAME "cisco-dumbdevice"
-#define SESSION_INIT_PPROMP HOSTNAME ">"
-
+#define SESSION_INIT_PPROMP HOSTNAME "@> "
+#define SESSION_INIT_LEVEL 0
 
 /* alias */
 /* simple alias to create a new session */

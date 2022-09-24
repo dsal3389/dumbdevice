@@ -9,16 +9,16 @@ define what function to call in case of error (advance)
 #define ON_ERROR_FUNC on_error
 
 
-/* unsafe, macros that are used outside this file */
-#define ANY_LEVEL -1
-
-
-/* safe,, macros that can be deleted or overwritten, only used in this file */
+/* safe, macros that can be deleted or overwritten, only used in this file */
+#define HOSTNAME "dumbdevice"
 #define CONSOLE_LEVEL 0
 #define EXEC_LEVEL 1
 
-#define HOSTNAME "dumbdevice"
+
+/* unsafe, macros that are used outside this file */
+#define ANY_LEVEL -1
 #define SESSION_INIT_PPROMP HOSTNAME "@> "
+#define SESSION_INIT_LEVEL 0
 
 
 /* alias */
