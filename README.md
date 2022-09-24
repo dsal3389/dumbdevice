@@ -30,3 +30,4 @@ and then all you need to do, is to replace you `conf.def.h` file with the desire
 
 ## todo
  * add throtteling
+ * device paging
