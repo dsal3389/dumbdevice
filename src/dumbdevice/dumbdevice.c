@@ -15,6 +15,10 @@ Session session_history[MAX_SESSION_HISTORY];
 Session *session = session_history; // by default points to the first element 
 
 
+/* 
+find a command based on the searched string, 
+if not found, return NULL and set device_error to the correct error
+*/
 Command * find_cmd_match(const char *str, size_t str_size)
 {
     Command *cmd = NULL, *current_cmd = NULL;
@@ -35,6 +39,7 @@ Command * find_cmd_match(const char *str, size_t str_size)
     return cmd;
 }
 
+/* execute all the given command actions */
 void execute_command(Command *cmd)
 {
     CommandAction *action = cmd->actions;
@@ -47,6 +52,7 @@ void execute_command(Command *cmd)
     }
 }
 
+/* opens the main command prompt */
 void shell()
 {
     char inpbuff[DEVICE_MAX_OUTPUT];
@@ -69,6 +75,7 @@ void shell()
     }
 }
 
+/* initiat the first session */
 void init_session()
 {
     session->prompt = SESSION_INIT_PPROMP;

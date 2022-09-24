@@ -26,6 +26,7 @@ void write_screen(const char *fmt, ...)
     write(STDOUT_FILENO, buff, outputted);
 }
 
+/* read input from stdin and prompt the user with the given prompt */
 size_t input(const char *prompt, void *buff, size_t buff_size)
 {
     size_t read_len;
@@ -66,6 +67,7 @@ size_t strip(char *str, size_t str_len, char *buff)
     return new_len;
 }
 
+/* display an error message and exit the process */
 void fatal(const char *fmt, ...)
 {
     va_list args;

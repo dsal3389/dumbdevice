@@ -1,3 +1,6 @@
+/*
+all actions that can be used by the Commands should be defined here
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
@@ -8,6 +11,7 @@
 #include "io.h"
 
 
+/* save the current session in the session history and create a new replica */
 void save_session(const Arg *arg, ...)
 {
     size_t session_history_len = session - session_history;
@@ -23,16 +27,19 @@ void save_session(const Arg *arg, ...)
     session++; 
 }
 
+/* change the current session prompt */
 void set_prompt(const Arg *arg, ...)
 {
     session->prompt = arg->v;
 }
 
+/* echos the given string to the screen */
 void echo(const Arg *arg, ...)
 {
     write_screen("%s", (char*) (arg->v));
 }
 
+/* read from a given file */
 void rd_file(const Arg *arg, ...)
 {
     int lr=0, fd = open(arg->v, O_RDONLY);
@@ -53,6 +60,7 @@ END:
     close(fd);
 }
 
+/* goes back 1 session in the session history, if there are no session, it will exit the process */
 void exit_session(const Arg *arg, ...)
 {
     // if the current session is the last on the session stack
@@ -61,11 +69,13 @@ void exit_session(const Arg *arg, ...)
     session--;
 }
 
+/* change the current session execution commands level */
 void set_session_level(const Arg *arg, ...)
 {
     session->level = arg->i;
 }
 
+/* default error handler, defined in cond.def.h as ON_ERROR_FUNC macro */
 void on_error(const Arg *arg, ...)
 {
     int error_code;

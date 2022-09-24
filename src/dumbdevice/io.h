@@ -5,7 +5,7 @@
 #include <string.h>
 #include <errno.h>
 
-
+// macros used for fatal and write_screen functinos
 #define LOG_ERRNO(op) "error::" op "::%s", strerror(errno)
 #define LOG_ERROR(op, msg) "error::" op "::" msg "\n"
 
