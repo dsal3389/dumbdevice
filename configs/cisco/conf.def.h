@@ -16,6 +16,7 @@ define what function to call in case of error (advance)
 #define HOSTNAME "dumbdevice"
 #define CONSOLE_LEVEL 0
 #define EXEC_LEVEL 1
+#define CONF_LEVEL 2
 
 /* unsafe, macros that are used outside this file */
 #define ANY_LEVEL -1
