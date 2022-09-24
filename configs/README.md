@@ -4,6 +4,7 @@ please copy all the files in one of the directories to the source code at src/du
 
 
 ```sh
+cp -f ../src/dumbdevice/conf.def.h ../src/dumbdevice/conf.def.h.bk
 cp -f <vendor>/conf.def.h ../src/dumbdevice/
 cp -f <vendor>/*.txt ..
 make build && dumbdevice.bin
