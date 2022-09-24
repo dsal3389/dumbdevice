@@ -16,5 +16,9 @@ install: build conf.h
 	cp -f $(OUT_BIN) $(INSTALL_PATH)/$(OUT_BIN)
 	echo $(INSTALL_PATH)/$(OUT_BIN) >> /etc/shells
 
+unistall:
+	rm -fv $(INSTALL_PATH)/$(OUT_BIN)
+# TODO: remove from /etc/shells as well
+
 clean:
-	rm -f dumbdevice src/dumbdevice/conf.h
+	rm -f $(OUT_BIN) src/dumbdevice/conf.h
