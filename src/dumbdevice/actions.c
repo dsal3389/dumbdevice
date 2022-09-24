@@ -50,8 +50,10 @@ void rd_file(const Arg *arg, ...)
         goto END;
     }
 
-    while((lr=read(fd, buffer, sizeof(buffer))) > 0)
+    while((lr=read(fd, buffer, sizeof(buffer))) > 0){
+        buffer[lr] = 0;
         write_screen(buffer);
+    }
 
     if(lr == -1)
         write_screen(LOG_ERROR("read", "failed reading file %s"), arg->v);
