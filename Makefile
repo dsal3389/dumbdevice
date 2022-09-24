@@ -2,7 +2,7 @@
 
 CC=gcc
 C_FLAGS=-Wall -std=c11
-INSTALL_PATH=/usr/local/bin/dumbdevice
+INSTALL_PATH=/usr/local/bin/
 OUT_BIN=dumbdevice.bin
 
 
