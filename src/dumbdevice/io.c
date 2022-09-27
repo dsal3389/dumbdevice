@@ -20,9 +20,48 @@ limitations under the License.
 #include <string.h>
 #include <limits.h>
 #include <errno.h>
+#include <time.h>
 
+#include "common.h"
 #include "io.h"
 
+/* max and min time alllowed to wait between every cooldown (in seconds) */
+#define MIN_THROTTLE_TIME 1
+#define MAX_THROTTLE_TIME 3
+
+/* minimum number of chars that are allowed to be written to screen */
+#define MIN_THROTTLE_RD_COUNT 6
+
+
+static void write_throttled(const char *str, size_t str_len, unsigned int chance)
+{
+    int rand_num = 0,
+        rd_chunk = 0,
+        rd_count = 0;
+    
+    if(str_len <= MIN_THROTTLE_RD_COUNT){
+        write(STDOUT_FILENO, str, str_len);
+        return;
+    }
+
+    srand(time(NULL));
+    rd_chunk = (rand() % str_len) + MIN_THROTTLE_RD_COUNT;
+
+    while(rd_count < str_len){
+        rand_num = rand() % 100;
+
+        if(rand_num > chance)
+            sleep((rand() % MAX_THROTTLE_TIME) + MIN_THROTTLE_TIME);
+
+        // mean we are about to read the last chunk from the string,
+        // so we need to get all the left chars 
+        if(rd_count + rd_chunk > str_len)
+            rd_chunk = str_len - rd_count;
+
+        write(STDOUT_FILENO, str+rd_count, rd_chunk);
+        rd_count += rd_chunk;
+    }
+}
 
 /*
 will output the string based on the configured throttle time
@@ -35,10 +74,22 @@ void write_screen(const char *fmt, ...)
 
     va_start(args, fmt);
     outputted = vsnprintf(buff, sizeof(buff)-1, fmt, args);
+    buff[outputted] = 0;
     va_end(args);
 
-    // TODO: implement throttle
-    write(STDOUT_FILENO, buff, outputted);
+    switch(session->t){
+        case disabled:
+            write(STDOUT_FILENO, buff, outputted);
+            break;
+
+        case slow:
+            write_throttled(buff, outputted, 30);
+            break;
+
+        case normal:
+            write_throttled(buff, outputted, 90);
+            break;
+    }
 }
 
 /* read input from stdin and prompt the user with the given prompt */

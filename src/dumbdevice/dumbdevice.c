@@ -23,7 +23,6 @@ limitations under the License.
 
 #define COMMANDS_LEN(cmds) (sizeof(cmds) / sizeof(Command))
 
-
 static int device_error = 0;
 
 Session session_history[MAX_SESSION_HISTORY];
@@ -94,6 +93,7 @@ void init_session()
     session->prompt = SESSION_INIT_PPROMP;
     session->level = SESSION_INIT_LEVEL;
     session->eof = 0;
+    session->t = SESSION_INIT_THROTTLE;
 }
 
 int main(int argc, char *argv[])

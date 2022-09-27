@@ -28,6 +28,8 @@ limitations under the License.
 #define ERROR_CMD_NOT_FOUND 0x1
 
 
+enum throttle { slow, normal, disabled };
+
 typedef union{
     void * v;
     int i;
@@ -45,6 +47,7 @@ typedef struct{
 typedef struct{
     int eof;
     int level;
+    enum throttle t;
     char *prompt;
 } Session;
 
