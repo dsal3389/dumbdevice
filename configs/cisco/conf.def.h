@@ -43,8 +43,8 @@ define what function to call in case of error (advance)
 
 /* configure device commands */
 static Command commands[] = {
-    NEW_SESSION_PROMPT_LVL(CONSOLE_LEVEL, "enable",  HOSTNAME "#"),
-    NEW_SESSION_PROMPT_LVL(EXEC_LEVEL, "config",  HOSTNAME "(config)#"),
+    NEW_SESSION_PROMPT_LVL(CONSOLE_LEVEL, "enable",  HOSTNAME "# "),
+    NEW_SESSION_PROMPT_LVL(EXEC_LEVEL, "config",  HOSTNAME "(config)# "),
     RD_ON_EXEC(EXEC_LEVEL, "show ip interface brief", "./interfaces.txt"),
     RD_ON_EXEC(EXEC_LEVEL, "show ip route", "./routes.txt"),
     { 

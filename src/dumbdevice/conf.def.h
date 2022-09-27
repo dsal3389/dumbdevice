@@ -48,8 +48,8 @@ define what function to call in case of error (advance)
 
 /* configure device commands */
 static Command commands[] = {
-    NEW_SESSION_PROMPT_LVL(CONSOLE_LEVEL, "config",  HOSTNAME "#"),
-    NEW_SESSION_PROMPT_LVL(EXEC_LEVEL,    "upgrade", HOSTNAME "=>"),
+    NEW_SESSION_PROMPT_LVL(CONSOLE_LEVEL, "config",  HOSTNAME "# "),
+    NEW_SESSION_PROMPT_LVL(EXEC_LEVEL,    "upgrade", HOSTNAME "=> "),
     RD_ON_EXEC(EXEC_LEVEL, "makefile", "./Makefile"),
     ECHO_S(ANY_LEVEL, "ls", "this is not a shell"),
     { 
