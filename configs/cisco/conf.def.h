@@ -22,7 +22,7 @@ define what function to call in case of error (advance)
 #define ANY_LEVEL -1
 #define SESSION_INIT_PPROMP HOSTNAME "> "
 #define SESSION_INIT_LEVEL CONSOLE_LEVEL
-#define SESSION_INIT_THROTTLE slow
+#define SESSION_INIT_THROTTLE normal
 
 /* alias */
 /* simple alias to create a new session */
