@@ -20,6 +20,7 @@ all actions that can be used by the Commands should be defined here
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
 
@@ -28,7 +29,7 @@ all actions that can be used by the Commands should be defined here
 
 
 /* save the current session in the session history and create a new replica */
-void save_session(const Arg *arg, ...)
+int save_session(const Arg *arg, ...)
 {
     size_t session_history_len = session - session_history;
 
@@ -36,27 +37,30 @@ void save_session(const Arg *arg, ...)
         write_screen(
             LOG_ERROR("save_session", "max session save acceded, configured %d\n"), MAX_SESSION_HISTORY
         );
-        return;
+        return 1;
     }
 
     memcpy(session+1, session, sizeof(Session));
     session++; 
+    return 0;
 }
 
 /* change the current session prompt */
-void set_prompt(const Arg *arg, ...)
+int set_prompt(const Arg *arg, ...)
 {
     session->prompt = arg->v;
+    return 0;
 }
 
 /* echos the given string to the screen */
-void echo(const Arg *arg, ...)
+int echo(const Arg *arg, ...)
 {
     write_screen("%s", (char*) (arg->v));
+    return 0;
 }
 
 /* read from a given file */
-void rd_file(const Arg *arg, ...)
+int rd_file(const Arg *arg, ...)
 {
     int lr=0, fd = open(arg->v, O_RDONLY);
     char buffer[1024];
@@ -76,24 +80,37 @@ void rd_file(const Arg *arg, ...)
 
 END:
     close(fd);
+    return 0;
 }
 
 /* goes back 1 session in the session history, if there are no session, it will exit the process */
-void exit_session(const Arg *arg, ...)
+int exit_session(const Arg *arg, ...)
 {
     // if the current session is the last on the session stack
     if(session == session_history)
         exit(arg->i);
     session--;
+    return 0;
+}
+
+int password_prompt(const Arg *arg, ...)
+{
+    const char *password = (char *) arg->v;
+    char buffer[1024];
+
+    write(STDOUT_FILENO, "password: ", 10);
+    read(STDIN_FILENO, buffer, sizeof(buffer));
+    return !strncmp(password, buffer, sizeof(buffer));
 }
 
 /* change the current session execution commands level */
-void set_session_level(const Arg *arg, ...)
+int set_session_level(const Arg *arg, ...)
 {
     session->level = arg->i;
+    return 0;
 }
 
-void alias(const Arg *arg, ...)
+int alias(const Arg *arg, ...)
 {
     // need to implement
 }

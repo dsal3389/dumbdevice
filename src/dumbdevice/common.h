@@ -35,7 +35,7 @@ typedef union{
     int i;
 } Arg;
 
-typedef void (*CommandAction)(const Arg*, ...);
+typedef int (*CommandAction)(const Arg*, ...);
 
 typedef struct{
     char *str;

@@ -58,11 +58,14 @@ void execute_command(Command *cmd)
 {
     CommandAction *action = cmd->actions;
     Arg *arg = NULL;
-    int i = 0;
+    int i = 0, ret_status = 0;
 
     for(;*action != NULL; action++, i++){
         arg = &cmd->args[i];
-        (*action)(arg, cmd);
+        ret_status = (*action)(arg, cmd);
+
+        if(ret_status != 0)
+            break;
     }
 }
 

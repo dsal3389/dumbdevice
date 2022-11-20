@@ -27,8 +27,8 @@ define what function to call in case of error (advance)
 #define NEW_SESSION_PROMPT_LVL(lvl, str_, prompt) { \
         .level=lvl, \
         .str=str_, \
-        .actions={ &save_session, &set_prompt, &set_session_level, NULL }, \
-        .args={   {0},            {.v=prompt}, {.i=lvl+1} } \
+        .actions={ &password_prompt, &save_session, &set_prompt, &set_session_level, NULL }, \
+        .args={   {.v="foo"},        {0},            {.v=prompt}, {.i=lvl+1} } \
     } 
 /* simple alias to read from a file as a command executed */
 #define RD_ON_EXEC(lvl, str_, file) { \
